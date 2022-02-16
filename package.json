@@ -1,0 +1,23 @@
+{
+  "name": "woovoo-odoo-frontend",
+  "version": "1.0.0",
+  "description": "Woovoo odoo front end",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/khangaikhuu/woovoo-odoo-frontend.git"
+  },
+  "keywords": [
+    "Odoo",
+    "React"
+  ],
+  "author": "Khangaikhuu Uvgunkhuu",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/khangaikhuu/woovoo-odoo-frontend/issues"
+  },
+  "homepage": "https://github.com/khangaikhuu/woovoo-odoo-frontend#readme"
+}
