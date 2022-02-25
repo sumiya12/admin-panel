@@ -1,1 +1,1 @@
-# woovoo-odoo-frontend
+# admin-panel-frontend
