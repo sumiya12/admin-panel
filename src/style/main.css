@@ -28,5 +28,5 @@
 }
 .contentLay {
   background: linear-gradient(#f2c3a8, rgb(255, 255, 255));
-  height: 100vh;
+  bottom: 0;
 }
