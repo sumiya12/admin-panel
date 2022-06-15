@@ -45,7 +45,7 @@ export default function Login() {
         <Loading />
       ) : (
         <div className="login-right">
-          <p>a</p>
+          <p>adfsdgs</p>
           <Form
             className="loginForm"
             name="basic"
@@ -72,10 +72,8 @@ export default function Login() {
                   message: "Please input your username!",
                 },
               ]}
-            >
-              <Input />
-            </Form.Item>
-
+            ></Form.Item>
+            <Input />
             <Form.Item
               label="Password"
               name="password"
@@ -85,10 +83,8 @@ export default function Login() {
                   message: "Please input your password!",
                 },
               ]}
-            >
-              <Input.Password />
-            </Form.Item>
-
+            ></Form.Item>
+            <Input.Password />
             <Form.Item
               name="remember"
               valuePropName="checked"

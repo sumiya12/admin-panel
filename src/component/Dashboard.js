@@ -12,29 +12,22 @@ import "antd/dist/antd.css";
 import "../style/main.css";
 import Icons from "../pictures/icons/icons";
 import { MENU } from "../util/constants";
-import { Menu, Dropdown, Layout, Drawer } from "antd";
+import { Menu, Dropdown, Layout } from "antd";
 import { useUser } from "../contexts/UserContext";
+import Config from "./SideMenu/Config";
 export default function Dashboard() {
   const { Header, Content, Footer, Sider } = Layout;
   const [user, setUser] = useUser();
   const [visible, setVisible] = useState(false);
-  const [childrenDrawer, setChildrenDrawer] = useState(false);
-
+  
   const showDrawer = () => {
-    setVisible(true);
-  };
+      setVisible(true);
+    };
+  
+    const onClose = () => {
+      setVisible(false);
+    };
 
-  const onClose = () => {
-    setVisible(false);
-  };
-
-  const showChildrenDrawer = () => {
-    setChildrenDrawer(true);
-  };
-
-  const onChildrenDrawerClose = () => {
-    setChildrenDrawer(false);
-  };
   const handlerLogout = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -45,15 +38,7 @@ export default function Dashboard() {
         <a type="primary" onClick={showDrawer}>
           Тохиргоо
         </a>
-        <Drawer
-          title="Тохиргоо"
-          width={450}
-          closable={false}
-          onClose={onClose}
-          visible={visible}
-        >
-          сбымхрбм
-        </Drawer>
+        <Config onClose={()=>onClose()} visible={visible} />
       </Menu.Item>
       <Menu.Item>
         <a onClick={handlerLogout}>Гарах</a>
@@ -91,16 +76,21 @@ export default function Dashboard() {
         </Sider>
         <Layout className="contentLay">
           <Header className="header">
-            <img src={Icons.logout} />
-            <Dropdown overlay={menu}>
-              <a
-                className="ant-dropdown-link"
-                href="#"
-                style={{ color: "#f17228" }}
-              >
-                Админ
-              </a>
-            </Dropdown>
+            <div style={{ justifyContent: "right" }}>
+              <img
+                src={Icons.logout}
+                // style={{ width: "10px", height: "10px" }}
+              />
+              <Dropdown overlay={menu}>
+                <a
+                  className="ant-dropdown-link"
+                  href="#"
+                  style={{ color: "#f17228" }}
+                >
+                  Админ
+                </a>
+              </Dropdown>
+            </div>
           </Header>
 
           <Content style={{ margin: "0 16px" }}>
