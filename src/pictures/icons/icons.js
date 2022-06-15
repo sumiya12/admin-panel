@@ -6,5 +6,6 @@ const Icons = {
   users: require("./users.png"),
   logo: require("./logo.png"),
   deliveryman: require("./deliveryman.png"),
+  logout: require("./userIcon.svg"),
 };
 export default Icons;

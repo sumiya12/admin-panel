@@ -18,7 +18,7 @@ export default function Orders() {
       <Divider orientation="left">Захиалгууд</Divider>
       <List
         header={
-          <div className="header">
+          <div className="header" lg={{ span: 3, offset: 2 }}>
             <span>Он сар өдөр</span>
             <span>Захиалга #</span>
             <span>Хэрэглэгч</span>
@@ -36,33 +36,9 @@ export default function Orders() {
           return (
             <>
               <List.Item className="listItems">
-                <Row className="rowss">
-                  {/* <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.number}</Col>
-                  <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.customer}</Col>
-                  <Col span={4}>{item.customer}</Col> */}
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 6, offset: 2 }}
-                  >
-                    {item.customer}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 11, offset: 1 }}
-                    lg={{ span: 6, offset: 2 }}
-                  >
-                    {item.customer}
-                  </Col>
-                  <Col
-                    className="cols"
-                    xs={{ span: 5, offset: 1 }}
-                    lg={{ span: 6, offset: 2 }}
-                  >
-                    {item.customer}
+                <Row className="rows">
+                  <Col className="cols" lg={{ span: 3, offset: 1 }}>
+                    {item.date}
                   </Col>
                 </Row>
               </List.Item>

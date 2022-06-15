@@ -3,14 +3,13 @@ import Dashboard from "./component/Dashboard";
 import Login from "./component/Login";
 import { useState } from "react";
 import moment from "moment";
+import { useUser } from "./contexts/UserContext";
 
 function App() {
-  // const [user, setUser] = useUser();
-  const [user, setUser] = useState(false);
-  console.log(
-    moment("2011-10:31 0923", "YYYYMMDD HHmm").format("YYYY/MM/DD --- HH:mm")
-  );
-  return <>{user ? <Login /> : <Dashboard />}</>;
+  const [user, setUser] = useUser();
+
+  // setUser(true);
+  return <>{!user ? <Login /> : <Dashboard />}</>;
 }
 
 export default App;

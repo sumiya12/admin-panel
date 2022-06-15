@@ -1,4 +1,6 @@
 import React from "react";
+
+import { useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import ControlPanel from "./SideMenu/ControlPanel";
 import Orders from "./SideMenu/Orders";
@@ -8,12 +10,57 @@ import Users from "./SideMenu/Users";
 import Deliverymen from "./SideMenu/Deliverymen";
 import "antd/dist/antd.css";
 import "../style/main.css";
-import { Layout, Menu } from "antd";
-import Icons from "../pictures/icons/icons.js";
+import Icons from "../pictures/icons/icons";
 import { MENU } from "../util/constants";
-
+import { Menu, Dropdown, Layout, Drawer } from "antd";
+import { useUser } from "../contexts/UserContext";
 export default function Dashboard() {
   const { Header, Content, Footer, Sider } = Layout;
+  const [user, setUser] = useUser();
+  const [visible, setVisible] = useState(false);
+  const [childrenDrawer, setChildrenDrawer] = useState(false);
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const showChildrenDrawer = () => {
+    setChildrenDrawer(true);
+  };
+
+  const onChildrenDrawerClose = () => {
+    setChildrenDrawer(false);
+  };
+  const handlerLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a type="primary" onClick={showDrawer}>
+          Тохиргоо
+        </a>
+        <Drawer
+          title="Тохиргоо"
+          width={450}
+          closable={false}
+          onClose={onClose}
+          visible={visible}
+        >
+          сбымхрбм
+        </Drawer>
+      </Menu.Item>
+      <Menu.Item>
+        <a onClick={handlerLogout}>Гарах</a>
+      </Menu.Item>
+    </Menu>
+  );
+
   return (
     <>
       <Layout style={{ margin: "0" }}>
@@ -43,7 +90,19 @@ export default function Dashboard() {
           </Menu>
         </Sider>
         <Layout className="contentLay">
-          <Header className="header" />
+          <Header className="header">
+            <img src={Icons.logout} />
+            <Dropdown overlay={menu}>
+              <a
+                className="ant-dropdown-link"
+                href="#"
+                style={{ color: "#f17228" }}
+              >
+                Админ
+              </a>
+            </Dropdown>
+          </Header>
+
           <Content style={{ margin: "0 16px" }}>
             <Routes
               className="site-layout-background"

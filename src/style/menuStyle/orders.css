@@ -1,6 +1,7 @@
 .header {
   text-align: center;
   text-decoration: none;
+  justify-content: space-between;
 }
 .header span {
   margin-right: 40px;
