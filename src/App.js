@@ -9,7 +9,7 @@ function App() {
   const [user, setUser] = useUser();
 
   // setUser(true);
-  return <>{!user ? <Login /> : <Dashboard />}</>;
+  return <>{user ? <Dashboard /> : <Login />}</>;
 }
 
 export default App;

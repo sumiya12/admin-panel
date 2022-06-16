@@ -7,8 +7,17 @@ const loginUser = async (credentials) => {
     body: JSON.stringify(credentials),
   });
 };
-const registerUser = async (credentials) => {
-  return await fetch("http://52.221.191.153/admin/register", {
+// const registerUser = async (credentials) => {
+//   return await fetch("http://52.221.191.153/admin/register", {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(credentials),
+//   });
+// };
+const UpdateUser = async (credentials) => {
+  return await fetch("https://dev-api.mstars.mn/admin/update/user", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -24,6 +33,7 @@ const userInfoStorage = (userInfo) => {
 
 export const userService = {
   loginUser,
-  registerUser,
+
   userInfoStorage,
+  UpdateUser,
 };

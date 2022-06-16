@@ -18,7 +18,7 @@ export default function Login() {
         if (res.success === true) {
           console.log(res);
           setUser({
-            userName: res.data.name,
+            name: res.data.name,
             email: res.data.email,
             id: res.data.id,
             address: res.data.address,
@@ -72,8 +72,10 @@ export default function Login() {
                   message: "Please input your username!",
                 },
               ]}
-            ></Form.Item>
-            <Input />
+            >
+              <Input />
+            </Form.Item>
+
             <Form.Item
               label="Password"
               name="password"
@@ -83,8 +85,10 @@ export default function Login() {
                   message: "Please input your password!",
                 },
               ]}
-            ></Form.Item>
-            <Input.Password />
+            >
+              <Input.Password />
+            </Form.Item>
+
             <Form.Item
               name="remember"
               valuePropName="checked"
