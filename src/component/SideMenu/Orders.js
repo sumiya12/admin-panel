@@ -1,19 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect , } from "react";
 import { otherServices } from "../../services/otherServices";
 import { useOrder } from "../../contexts/OrderContext";
+import { useUser } from "../../contexts/UserContext";
 import { List, Row, Col, Divider } from "antd";
 import "../../style/menuStyle/orders.css";
-export default function Orders() {
+export default function Orders(values) {
   const [order, setOrder] = useOrder();
+  const [user, setUser] = useUser();
   useEffect(() => {
     otherServices
-      .getAllOrders()
+      .getAllOrders(values)
       .then((e) => e.json())
       .then((e) => {
         console.log(e);
-        setOrder(e.Orders);
+        setOrder({
+          // user_id: user?.id,
+          // user_address: {
+          //   district: e.target.elements.district?.value,
+          //   khoroo: e.target.elements.khoroo?.value,
+          //   apartment: e.target.elements.apartment?.value,
+          //   additional: e.target.elements.additional?.value,
+          // },
+          // phone: e.target.elements.number?.value,
+          // basket: basketFood,
+          // payment_type: e.target[5].checked
+          //   ? "CASH"
+          //   : e.target[6].checked
+          //   ? "CARD"
+          //   : "",
+          token: user?.token,
+        });
       });
   }, []);
+
   return (
     <div>
       <Divider orientation="left">Захиалгууд</Divider>
