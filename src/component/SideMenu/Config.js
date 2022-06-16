@@ -8,13 +8,7 @@ export default function Config(props) {
   const saveUser = [];
   const [user, setUser] = useUser();
   function onFinish(values) {
-    // fetch("http://52.221.191.153/admin/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(credentials),
-    //   });
+
     userService
       .UpdateUser({
         email: user.email,

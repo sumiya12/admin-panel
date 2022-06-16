@@ -1,5 +1,5 @@
 const getAllOrders = async () => {
-  return await fetch("../../DummyJson/Orders.json", {
+  return await fetch("https://dev-api.mstars.mn/api/order", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

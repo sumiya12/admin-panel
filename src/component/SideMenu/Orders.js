@@ -9,10 +9,11 @@ export default function Orders() {
     otherServices
       .getAllOrders()
       .then((e) => e.json())
-      .then((e) => setOrder(e.Orders));
+      .then((e) => {
+        console.log(e);
+        setOrder(e.Orders);
+      });
   }, []);
-
-  console.log(order);
   return (
     <div>
       <Divider orientation="left">Захиалгууд</Divider>
@@ -32,14 +33,35 @@ export default function Orders() {
         footer={<div>Footer</div>}
         bordered
         dataSource={order}
-        renderItem={(item) => {
+        renderItem={(item, i) => { 
           return (
             <>
-              <List.Item className="listItems">
+              <List.Item className="listItems" key={i}>
                 <Row className="rows">
-                  <Col className="cols" lg={{ span: 3, offset: 1 }}>
-                    {item.date}
-                  </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.date}
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.number}
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.customer}
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.order.map((e)=> {return e.name})}
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                      {parseInt(item.order.map((e)=> {return e.quantity })) * parseInt(item.order.map((e)=> {return e.price})) }
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.date}
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.date}
+                      </Col>
+                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                        {item.date}
+                      </Col>
                 </Row>
               </List.Item>
             </>

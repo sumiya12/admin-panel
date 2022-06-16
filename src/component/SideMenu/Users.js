@@ -7,11 +7,11 @@ export default function Users() {
 
   return (
     <div>
-      {user?.map((person, i) => {
+      {/* {user?.map((person, i) => {
         <ul>
           <li key={i}>{person}</li>
         </ul>;
-      })}
+      })} */}
     </div>
   );
 }
