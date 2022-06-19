@@ -1,11 +1,12 @@
 .loginForm {
-  margin-left: 55%;
-  margin-top: 15%;
-  width: 30%;
+  margin-left: 60vw;
+  margin-top: 15vh;
+  width: 35vh;
   background-color: rgb(255, 255, 255);
-  padding: 100px 10px 100px 10px;
+  padding: 100px 30px 100px 30px;
   text-align: center;
-  /* opacity: 0.5; */
+  justify-content: center;
+  align-items: center;
   border-radius: 25px;
 }
 

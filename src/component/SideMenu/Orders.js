@@ -1,44 +1,38 @@
-import React, { useEffect , } from "react";
-import { otherServices } from "../../services/otherServices";
+import React, { useEffect,useState } from "react";
+// import { otherServices } from "../../services/otherServices";
 import { useOrder } from "../../contexts/OrderContext";
 import { useUser } from "../../contexts/UserContext";
-import { List, Row, Col, Divider } from "antd";
+import { List, Row, Col, Divider, Pagination } from "antd";
 import "../../style/menuStyle/orders.css";
-export default function Orders(values) {
+export default function Orders(values ) {
   const [order, setOrder] = useOrder();
   const [user, setUser] = useUser();
+  const [current, setCurrent] = useState(1);
+  
   useEffect(() => {
-    otherServices
-      .getAllOrders(values)
+    fetch(`https://dev-api.mstars.mn/api/orders?page=${current}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ token: user.token } )
+  })
       .then((e) => e.json())
       .then((e) => {
-        console.log(e);
-        setOrder({
-          // user_id: user?.id,
-          // user_address: {
-          //   district: e.target.elements.district?.value,
-          //   khoroo: e.target.elements.khoroo?.value,
-          //   apartment: e.target.elements.apartment?.value,
-          //   additional: e.target.elements.additional?.value,
-          // },
-          // phone: e.target.elements.number?.value,
-          // basket: basketFood,
-          // payment_type: e.target[5].checked
-          //   ? "CASH"
-          //   : e.target[6].checked
-          //   ? "CARD"
-          //   : "",
-          token: user?.token,
-        });
+        console.log(e.data.docs);
+        setOrder(e.data.docs);
       });
-  }, []);
-
+  }, [current]);
+  const onChange = (page) => {
+    console.log(page);
+    setCurrent(page);
+  };
   return (
     <div>
       <Divider orientation="left">Захиалгууд</Divider>
       <List
         header={
-          <div className="header" lg={{ span: 3, offset: 2 }}>
+          <div className="header" lg={{ span: 2, offset: 1 }}>
             <span>Он сар өдөр</span>
             <span>Захиалга #</span>
             <span>Хэрэглэгч</span>
@@ -49,38 +43,38 @@ export default function Orders(values) {
             <span>Төлөв</span>
           </div>
         }
-        footer={<div>Footer</div>}
+        footer={<div><Pagination current={current} total={50} onChange={onChange} /></div>}
         bordered
         dataSource={order}
-        renderItem={(item, i) => { 
+        renderItem={(item) => {
           return (
             <>
-              <List.Item className="listItems" key={i}>
+              <List.Item className="listItems">
                 <Row className="rows">
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.date}
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.number}
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.customer}
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.order.map((e)=> {return e.name})}
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                      {parseInt(item.order.map((e)=> {return e.quantity })) * parseInt(item.order.map((e)=> {return e.price})) }
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.date}
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.date}
-                      </Col>
-                      <Col className="cols" lg={{ span: 2, offset: 1 }}>
-                        {item.date}
-                      </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item.created_date}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item.deliverman_id}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item.payment_type}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item.status}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item.total_price}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item.user_id}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item._v}
+                  </Col>
+                  <Col className="cols" lg={{ span: 2, offset: 1 }}>
+                    {item._id}
+                  </Col>
                 </Row>
               </List.Item>
             </>

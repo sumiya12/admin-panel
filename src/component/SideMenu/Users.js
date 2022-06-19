@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { userService } from "../../services/userService";
 export default function Users() {
   const [user, setUser] = useUser();
-
+console.log(user);
   return (
     <div>
       {/* {user?.map((person, i) => {

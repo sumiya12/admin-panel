@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import ControlPanel from "./SideMenu/ControlPanel";
@@ -76,10 +75,10 @@ export default function Dashboard() {
         </Sider>
         <Layout className="contentLay">
           <Header className="header">
-            <div style={{ justifyContent: "right" }}>
+            <div style={{ justifyContent: "right", display:"flex",alignItems:'center' , margin:'auto' }}>
               <img
                 src={Icons.logout}
-                // style={{ width: "10px", height: "10px" }}
+                style={{ width: "20px", height: "20px" }}
               />
               <Dropdown overlay={menu}>
                 <a

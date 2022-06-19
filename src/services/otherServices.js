@@ -1,12 +1,12 @@
-const getAllOrders = async (credentials) => {
-  return await fetch("https://dev-api.mstars.mn/api/order", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  });
-};
+// const getAllOrders = async (credentials,{page}) => {
+//   return await fetch(`https://dev-api.mstars.mn/api/orders?page=${page}`, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(credentials ),
+//   });
+// };
 // const registerUser = async (credentials) => {
 //   return await fetch("http://52.221.191.153/admin/register", {
 //     method: "POST",
@@ -22,6 +22,6 @@ const getAllOrders = async (credentials) => {
 //   localStorage.setItem("userInfo", JSON.stringify(userInfo.data));
 // };
 
-export const otherServices = {
-  getAllOrders,
-};
+// export const otherServices = {
+//   getAllOrders,
+// };
