@@ -25,7 +25,7 @@ export default function Orders(values ) {
       });
   }, [current]);
   const onChange = (page) => {
-    console.log(page);
+    // console.log(page);
     setCurrent(page);
   };
   return (
@@ -50,7 +50,7 @@ export default function Orders(values ) {
         renderItem={(item) => {
           return (
             <>
-              <List.Item className="listItems" style={{}}>
+              <List.Item className="listItems" style={{marginTop:'16px'}}>
                 <Row className="rows" style={{width:'100vw',justifyContent:'space-between',display:'flex', }} >
                   <Col className="cols" lg={{ span: 2, offset: 1 }}  xs={{ span: 1, offset: 1 }} style={{ padding:'0px' ,margin:"0px 10px 0px 10px"}} >
                     {moment(item.created_date).format("YYYY/MM/DD")}
