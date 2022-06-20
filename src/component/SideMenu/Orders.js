@@ -77,7 +77,7 @@ export default function Orders(values) {
           </Checkbox>
         }
         footer={
-          <div>
+          <div style={{ marginTop: "auto" }}>
             <Pagination current={current} total={50} onChange={onChange} />
           </div>
         }
@@ -86,7 +86,14 @@ export default function Orders(values) {
         renderItem={(item) => {
           return (
             <>
-              <List.Item className="listItems" style={{ marginTop: "16px" }}>
+              <List.Item
+                className="listItems"
+                style={{
+                  marginTop: "0px",
+                  background: "white",
+                  // borderBottom: "none",
+                }}
+              >
                 <Row
                   className="rows"
                   style={{

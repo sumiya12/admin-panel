@@ -99,10 +99,19 @@ export default function Dashboard() {
             </div>
           </Header>
 
-          <Content style={{ margin: "0 16px", height: "100vh" }}>
+          <Content
+            style={{
+              margin: "0 16px",
+              minHeight: "100vh",
+              flexDirection: "column",
+              display: "flex",
+            }}
+          >
             <Routes
               className="site-layout-background"
-              style={{ padding: 24, minHeight: 360 }}
+              style={{
+                padding: 24,
+              }}
             >
               <Route path="/" element={<Navigate replace to="/home" />} />
               <Route path="/home" element={<ControlPanel />} />
@@ -121,7 +130,7 @@ export default function Dashboard() {
               float: "right",
             }}
           >
-            <span className="fooder">
+            <span className="fooder" style={{ marginTop: "auto" }}>
               Andy Design ©2022 Created by Andy's Code
             </span>
           </Footer>

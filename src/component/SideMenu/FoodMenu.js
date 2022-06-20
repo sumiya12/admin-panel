@@ -39,6 +39,7 @@ export default function FoodMenu() {
                 display: "flex",
                 paddingLeft: "10px",
                 marginLeft: "0px",
+                marginBottom: "10px",
               }}
               lg={{ span: 2, offset: 1 }}
             >
@@ -59,8 +60,13 @@ export default function FoodMenu() {
             </div>
           }
           footer={
-            <div>
-              <Pagination current={current} total={50} onChange={onChange} />
+            <div style={{ marginTop: "auto" }}>
+              <Pagination
+                current={current}
+                total={50}
+                onChange={onChange}
+                style={{ marginTop: "auto" }}
+              />
             </div>
           }
           bordered
@@ -68,7 +74,10 @@ export default function FoodMenu() {
           renderItem={(item, i) => {
             return (
               <>
-                <List.Item className="listItems" style={{ marginTop: "16px" }}>
+                <List.Item
+                  className="listItems"
+                  style={{ marginTop: "0px", background: "white" }}
+                >
                   <Row
                     className="rows"
                     style={{
@@ -81,7 +90,7 @@ export default function FoodMenu() {
                       className="cols"
                       lg={{ span: 2, offset: 1 }}
                       xs={{ span: 1, offset: 1 }}
-                      style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                      style={{ padding: "0px", margin: "0px 0px 0px 0px" }}
                     >
                       {i + 1}
                     </Col>
