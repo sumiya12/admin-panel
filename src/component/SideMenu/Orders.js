@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { otherServices } from "../../services/otherServices";
+// import { otherServices } from "../../services/otherServices";
+
 import { useOrder } from "../../contexts/OrderContext";
 import { useUser } from "../../contexts/UserContext";
-import { List, Row, Col, Divider } from "antd";
-import { Pagination } from "antd";
-import "../../style/menuStyle/orders.css";
 import moment from "moment";
+import { List, Row, Col, Divider, Pagination, Checkbox } from "antd";
+import "../../style/menuStyle/orders.css";
 export default function Orders(values) {
   const [order, setOrder] = useOrder();
   const [user, setUser] = useUser();
   const [current, setCurrent] = useState(1);
-
+  const [checkedList, setCheckedList] = useState();
+  const [indeterminate, setIndeterminate] = useState(true);
+  const [checkAll, setCheckAll] = useState(false);
+  const CheckboxGroup = Checkbox.Group;
+  const plainOptions = [];
   useEffect(() => {
     fetch(`https://dev-api.mstars.mn/api/orders?page=${current}`, {
       method: "POST",
@@ -26,16 +30,42 @@ export default function Orders(values) {
       });
   }, [current]);
   const onChange = (page) => {
-    console.log(page);
+    // console.log(page);
     setCurrent(page);
   };
-  const showTotal = (total) => `Total ${total} items`;
+  const onChanged = (list) => {
+    // debugger;
+    setCheckedList(list);
+    console.log(list);
+    setIndeterminate(!!list.length && list.length < plainOptions.length);
+    console.log(list.length);
+    // setCheckAll(list.length === plainOptions.length);
+  };
+  const onCheckAllChange = (e) => {
+    setCheckedList(e.target.checked ? plainOptions : []);
+    console.log(e.target.checked);
+    setIndeterminate(false);
+    setCheckAll(e.target.checked);
+  };
+
   return (
     <div>
       <Divider orientation="left">Захиалгууд</Divider>
       <List
         header={
-          <div className="header" lg={{ span: 3, offset: 2 }}>
+          <Checkbox
+            indeterminate={indeterminate}
+            onChange={onCheckAllChange}
+            checked={checkAll}
+            className="header"
+            style={{
+              justifyContent: "space-between",
+              display: "flex",
+              paddingLeft: "10px",
+              marginLeft: "0px",
+            }}
+            lg={{ span: 2, offset: 1 }}
+          >
             <span>Он сар өдөр</span>
             <span>Захиалга #</span>
             <span>Хэрэглэгч</span>
@@ -44,49 +74,110 @@ export default function Orders(values) {
             <span>Төлбөр</span>
             <span>Утас</span>
             <span>Төлөв</span>
-          </div>
+          </Checkbox>
         }
         footer={
           <div>
-            <Pagination
-              defaultCurrent={1}
-              total={60}
-              current={current}
-              onChange={onChange}
-              showTotal={showTotal}
-            />
+            <Pagination current={current} total={50} onChange={onChange} />
           </div>
         }
         bordered
         dataSource={order}
-        renderItem={(item, i) => {
+        renderItem={(item) => {
           return (
             <>
-              <List.Item className="listItems" key={i}>
-                <Row className="rows">
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
-                    {moment(item.created_date).format("YYYY/DD/MM")}
+              <List.Item className="listItems" style={{ marginTop: "16px" }}>
+                <Row
+                  className="rows"
+                  style={{
+                    width: "100vw",
+                    justifyContent: "space-between",
+                    display: "flex",
+                  }}
+                >
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    <Checkbox
+                      indeterminate={indeterminate}
+                      onChange={onChanged}
+                      checked={checkAll}
+                      value={checkedList}
+                    >
+                      {moment(item.created_date).format("YYYY/MM/DD")}
+                    </Checkbox>
+                    {/* <CheckboxGroup
+                      options={plainOptions}
+                      value={checkedList}
+                      onChange={onCheckAllChange}
+                    /> */}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
-                    {item.total_price}
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    {item.deliverman_id}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
-                    {item.user_id}
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    {item.payment_type}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
                     {item.status}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    {item.total_price}
+                  </Col>
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
                     {item.user_id}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
-                    {item.date}
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    {item._v}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
-                    {item.date}
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    {item.phone}
                   </Col>
-                  <Col className="cols" lg={{ span: 6, offset: 1 }}>
-                    {item.date}
+                  <Col
+                    className="cols"
+                    lg={{ span: 2, offset: 1 }}
+                    xs={{ span: 1, offset: 1 }}
+                    style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
+                  >
+                    {item._id}
                   </Col>
                 </Row>
               </List.Item>

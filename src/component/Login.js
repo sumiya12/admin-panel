@@ -45,15 +45,15 @@ export default function Login() {
         <Loading />
       ) : (
         <div className="login-right">
-          <p>adfsdgs</p>
+          <p>'</p>
           <Form
             className="loginForm"
             name="basic"
             labelCol={{
-              span: 8,
+              span: 24,
             }}
             wrapperCol={{
-              span: 16,
+              span: 24,
             }}
             initialValues={{
               remember: true,
@@ -63,13 +63,14 @@ export default function Login() {
             autoComplete="off"
             onSubmit={handler}
           >
+            <img src=""/>
             <Form.Item
-              label="E-Mail"
+              label="И-мэйл"
               name="email"
               rules={[
                 {
-                  required: true,
-                  message: "Please input your username!",
+                  // required: true,
+                  // message: "Please input your username!",
                 },
               ]}
             >
@@ -77,12 +78,12 @@ export default function Login() {
             </Form.Item>
 
             <Form.Item
-              label="Password"
+              label="Нууц үг"
               name="password"
               rules={[
                 {
-                  required: true,
-                  message: "Please input your password!",
+                  // required: true,
+                  // message: "Please input your password!",
                 },
               ]}
             >

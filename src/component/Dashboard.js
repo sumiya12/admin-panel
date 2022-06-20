@@ -1,5 +1,4 @@
 import React from "react";
-
 import { useState } from "react";
 import { Routes, Route, Link, Navigate } from "react-router-dom";
 import ControlPanel from "./SideMenu/ControlPanel";
@@ -19,14 +18,14 @@ export default function Dashboard() {
   const { Header, Content, Footer, Sider } = Layout;
   const [user, setUser] = useUser();
   const [visible, setVisible] = useState(false);
-  
+
   const showDrawer = () => {
-      setVisible(true);
-    };
-  
-    const onClose = () => {
-      setVisible(false);
-    };
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
 
   const handlerLogout = () => {
     setUser(null);
@@ -38,7 +37,7 @@ export default function Dashboard() {
         <a type="primary" onClick={showDrawer}>
           Тохиргоо
         </a>
-        <Config onClose={()=>onClose()} visible={visible} />
+        <Config onClose={() => onClose()} visible={visible} />
       </Menu.Item>
       <Menu.Item>
         <a onClick={handlerLogout}>Гарах</a>
@@ -76,10 +75,17 @@ export default function Dashboard() {
         </Sider>
         <Layout className="contentLay">
           <Header className="header">
-            <div style={{ justifyContent: "right" }}>
+            <div
+              style={{
+                justifyContent: "right",
+                display: "flex",
+                alignItems: "center",
+                margin: "auto",
+              }}
+            >
               <img
                 src={Icons.logout}
-                // style={{ width: "10px", height: "10px" }}
+                style={{ width: "20px", height: "20px" }}
               />
               <Dropdown overlay={menu}>
                 <a
@@ -93,7 +99,7 @@ export default function Dashboard() {
             </div>
           </Header>
 
-          <Content style={{ margin: "0 16px" }}>
+          <Content style={{ margin: "0 16px", height: "100vh" }}>
             <Routes
               className="site-layout-background"
               style={{ padding: 24, minHeight: 360 }}
@@ -110,7 +116,7 @@ export default function Dashboard() {
           <Footer
             style={{
               textAlign: "right",
-
+              // height: "100vh",
               bottom: 0,
               float: "right",
             }}
