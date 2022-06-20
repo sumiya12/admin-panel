@@ -7,8 +7,10 @@ import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/UserContext";
 import { OrderProvider } from "./contexts/OrderContext";
 import { LoadingProvider } from "./contexts/LoadingContext";
+import { FoodProvider } from "./contexts/FoodContext";
 ReactDOM.render(
   <React.StrictMode>
+    <FoodProvider>
     <UserProvider>
       <OrderProvider>
         <LoadingProvider>
@@ -18,6 +20,7 @@ ReactDOM.render(
         </LoadingProvider>
       </OrderProvider>
     </UserProvider>
+    </FoodProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

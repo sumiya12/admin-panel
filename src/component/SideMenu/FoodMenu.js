@@ -1,26 +1,53 @@
 import React, { useEffect, useState } from "react";
 import { otherServices } from "../../services/otherServices";
-
+import FoodConfig from "../SideMenu/FoodConfig"
 import { useOrder } from "../../contexts/OrderContext";
 import { useUser } from "../../contexts/UserContext";
 import moment from "moment";
-import { List, Row, Col, Divider, Pagination, Checkbox } from "antd";
+import { List, Row, Col, Divider, Pagination, Dropdown, Menu } from "antd";
+import { useFood } from "../../contexts/FoodContext";
 export default function FoodMenu() {
-  const [food, setFood] = useState();
+  const [foods, setFoods] = useFood();
   const [current, setCurrent] = useState(1);
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     otherServices
       .getAllFood()
       .then((e) => e.json())
       .then((e) => {
-        console.log(e.data);
-        setFood(e.data);
+        // console.log(e.data);
+        setFoods(e.data);
       });
   }, [current]);
   const onChange = (page) => {
     // console.log(page);
     setCurrent(page);
   };
+  // const eachFoodClicked = (event)=>{
+  //   const index = foods.map((e,i)=> {return e[i]===event.target.index})
+  //   console.log(index);
+  // }
+
+  const showDrawer = () => {
+    setVisible(true);
+  };
+
+  const onClose = () => {
+    setVisible(false);
+  };
+  const menu = (
+    <Menu>
+      <Menu.Item>
+        <a type="primary" onClick={showDrawer}>
+          Харах
+        </a>
+        <FoodConfig onClose={() => onClose()} visible={visible} />
+      </Menu.Item>
+      <Menu.Item>
+        <a>Устгах</a>
+      </Menu.Item>
+    </Menu>
+  );
   const number = 0;
   return (
     <div>
@@ -50,13 +77,7 @@ export default function FoodMenu() {
               <span>Порц</span>
               <span>Үнэ</span>
               <span>Категори</span>
-              <span>
-                <img
-                  src="../../pictures/icons/3vantseg.png"
-                  alt=""
-                  style={{ width: "20px", height: "20px" }}
-                />
-              </span>
+              <span></span>
             </div>
           }
           footer={
@@ -70,7 +91,7 @@ export default function FoodMenu() {
             </div>
           }
           bordered
-          dataSource={food}
+          dataSource={foods}
           renderItem={(item, i) => {
             return (
               <>
@@ -156,7 +177,48 @@ export default function FoodMenu() {
                       xs={{ span: 1, offset: 1 }}
                       style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
                     >
-                      {}
+                      {
+                        <Dropdown overlay={menu} >
+                          <a  key={i}
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              padding: "2px",
+                              border: "none",
+                            }}
+                          >
+                            <span
+                              style={{
+                                border: "1px solid #F17228",
+                                width: "5px",
+                                height: "5px",
+                                background: "#F17228",
+                                borderRadius: "50%",
+                              }}
+                            ></span>
+                            <span
+                              style={{
+                                border: "1px solid #F17228",
+                                width: "5px",
+                                height: "5px",
+                                background: "#F17228",
+                                borderRadius: "50%",
+                                paddingTop: "1px",
+                              }}
+                            ></span>
+                            <span
+                              style={{
+                                border: "1px solid #F17228",
+                                width: "5px",
+                                height: "5px",
+                                background: "#F17228",
+                                borderRadius: "50%",
+                                paddingTop: "1px",
+                              }}
+                            ></span>
+                          </a>
+                        </Dropdown>
+                      }
                     </Col>
                   </Row>
                 </List.Item>
