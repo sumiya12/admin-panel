@@ -30,7 +30,7 @@ export default function Orders(values) {
       });
   }, [current]);
   const onChange = (page) => {
-    // console.log(page);
+    console.log(page);
     setCurrent(page);
   };
   const onChanged = (list) => {

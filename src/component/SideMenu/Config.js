@@ -8,7 +8,6 @@ export default function Config(props) {
   const saveUser = [];
   const [user, setUser] = useUser();
   function onFinish(values) {
-
     userService
       .UpdateUser({
         email: user.email,

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import { otherServices } from "../services/otherServices"; 
+import { otherServices } from "../services/otherServices";
 
 export const FoodContext = createContext({});
 
@@ -15,7 +15,7 @@ export const FoodProvider = (props) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-          console.log(data.data);
+          // console.log(data.data);
           setFoods(data.data);
         }
       })

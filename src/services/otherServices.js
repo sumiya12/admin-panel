@@ -7,15 +7,16 @@
 //     body: JSON.stringify(credentials ),
 //   });
 // };
-// const registerUser = async (credentials) => {
-//   return await fetch("http://52.221.191.153/admin/register", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(credentials),
-//   });
-// };
+const deleteFood = async (credentials, id) => {
+  console.log(id);
+  return await fetch(`https://dev-api.mstars.mn/api/delete/food/${id}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+};
 
 // const userInfoStorage = (userInfo) => {
 //   localStorage.setItem("token", userInfo.token);
@@ -29,7 +30,18 @@ const getAllFood = async () => {
     },
   });
 };
+const addFood = async (credentials) => {
+  return await fetch("https://dev-api.mstars.mn/api/new/food", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+};
 
 export const otherServices = {
   getAllFood,
+  deleteFood,
+  addFood,
 };
