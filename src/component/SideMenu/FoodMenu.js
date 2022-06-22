@@ -8,7 +8,6 @@ import { List, Row, Col, Divider, Pagination, Dropdown, Menu } from "antd";
 import { useFood } from "../../contexts/FoodContext";
 export default function FoodMenu() {
   const [foods, setFoods] = useFood();
-
   const [user, setUser] = useUser();
   const [data, setData] = useState();
   const [visible, setVisible] = useState(false);

@@ -52,6 +52,15 @@ export default function Orders(values) {
   return (
     <div>
       <Divider orientation="left">Захиалгууд</Divider>
+      <div style={{display:'flex' , justifyContent:'space-between'}}>
+        <select id="framework">
+          <option Defaultvalue="0">Бүгд</option>
+          <option value="1">Хүлээж авсан</option>
+          <option value="2">Амжилттай</option>
+          <option value="3">Цуцлагдсан</option>
+        </select>
+        <button>+ Захиалга нэмэх</button>
+      </div>
       <List
         header={
           <Checkbox
