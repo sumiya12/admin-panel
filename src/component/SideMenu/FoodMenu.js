@@ -1,41 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { otherServices } from "../../services/otherServices";
-import FoodConfig from "../SideMenu/FoodConfig";
+import FoodConfig from "../SideMenu/FoodConfig"
+import { useOrder } from "../../contexts/OrderContext";
 import { useUser } from "../../contexts/UserContext";
-import { List, Row, Col, Divider, Dropdown, Menu } from "antd";
+import moment from "moment";
+import { List, Row, Col, Divider, Pagination, Dropdown, Menu } from "antd";
 import { useFood } from "../../contexts/FoodContext";
-
 export default function FoodMenu() {
   const [foods, setFoods] = useFood();
-  const [user, setUser] = useUser();
-  const [data, setData] = useState();
+  const [current, setCurrent] = useState(1);
   const [visible, setVisible] = useState(false);
-  const click_ref = React.useRef(null);
   useEffect(() => {
     otherServices
       .getAllFood()
       .then((e) => e.json())
       .then((e) => {
-        console.log(e.data);
+        // console.log(e.data);
         setFoods(e.data);
       });
-    function deleteFood() {
-      otherServices
-        .deleteFood({ token: user.token }, data)
-        .then((e) => e.json())
-        .then((e) => {
-          console.log(e.data);
-          setFoods(e.data);
-        });
-    }
-    click_ref.current = deleteFood;
-  }, [data]);
+  }, [current]);
+  const onChange = (page) => {
+    // console.log(page);
+    setCurrent(page);
+  };
+  // const eachFoodClicked = (event)=>{
+  //   const index = foods.map((e,i)=> {return e[i]===event.target.index})
+  //   console.log(index);
+  // }
 
   const showDrawer = () => {
-    setVisible(true);
-  };
-  const addFood = () => {
-    showDrawer();
     setVisible(true);
   };
 
@@ -45,10 +38,14 @@ export default function FoodMenu() {
   const menu = (
     <Menu>
       <Menu.Item>
-        <a type="primary">Засах</a>
+        <a type="primary" >
+          Харах
+        </a>
         <FoodConfig onClose={() => onClose()} visible={visible} />
       </Menu.Item>
-      <Menu.Item onClick={() => click_ref.current()}>Устгах</Menu.Item>
+      <Menu.Item>
+        <a>Устгах</a>
+      </Menu.Item>
     </Menu>
   );
   const number = 0;
@@ -57,8 +54,8 @@ export default function FoodMenu() {
       <div>
         <Divider orientation="left">ХООЛНЫ ЦЭС</Divider>
         <div style={{ justifyContent: "space-between", display: "flex" }}>
-          <input value="Хайх"></input>
-          <button onClick={addFood}>Хоол нэмэх</button>
+          <input value="haih"></input>
+          <button onSubmit={showDrawer}>Hool nemeh</button>
         </div>
         <List
           header={
@@ -85,12 +82,12 @@ export default function FoodMenu() {
           }
           footer={
             <div style={{ marginTop: "auto" }}>
-              {/* <Pagination
+              <Pagination
                 current={current}
                 total={50}
                 onChange={onChange}
                 style={{ marginTop: "auto" }}
-              /> */}
+              />
             </div>
           }
           bordered
@@ -181,13 +178,8 @@ export default function FoodMenu() {
                       style={{ padding: "0px", margin: "0px 10px 0px 10px" }}
                     >
                       {
-                        <Dropdown overlay={menu}>
-                          <a
-                            key={i}
-                            onClick={() => {
-                              setData(item._id);
-                            }}
-                            key={i}
+                        <Dropdown overlay={menu} >
+                          <a  key={i}
                             style={{
                               display: "flex",
                               flexDirection: "column",
