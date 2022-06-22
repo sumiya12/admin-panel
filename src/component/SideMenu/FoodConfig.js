@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { otherServices } from "../../services/otherServices";
 import { Drawer } from "antd";
@@ -10,7 +10,7 @@ export default function FoodConfig(props) {
   const [user, setUser] = useUser();
   const addFoods = async (event) => {
     event.preventDefault();
-    console.log(event.target.elements.name.value);
+    console.log(event.target.file);
     const data = {
       category_id: event.target.elements.category.value,
       name: event.target.elements.name.value,
@@ -19,8 +19,8 @@ export default function FoodConfig(props) {
       ingredients: event.target.elements.ingredients.value,
       status: false,
       sales: true,
-      image: foods.image,
-      tumb_img: "../../pictures/images/login-background1.png",
+      image: event.target.elements.picture.value,
+      tumb_img: `https://mtars-fooddelivery.s3.ap-southeast-1.amazonaws.com{../../pictures/images/login-background1.png}`,
       token: user.token,
     };
 
@@ -37,6 +37,8 @@ export default function FoodConfig(props) {
       })
       .catch((e) => console.log(e.message))
       .finally(() => {});
+
+    
   };
 
   // console.log(props.food);
@@ -78,6 +80,10 @@ export default function FoodConfig(props) {
         <div>
           <label htmlFor="sales">sales</label>
           <input type="text" name="sales" />
+        </div>
+        <div>
+          <label htmlFor="Upload image">Upload image</label>
+        <input type="file" name="picture" />
         </div>
 
         <button type="submit" form="register">

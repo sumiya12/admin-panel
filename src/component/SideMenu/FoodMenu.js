@@ -21,20 +21,19 @@ export default function FoodMenu() {
         // console.log(e.data);
         setFoods(e.data);
       });
-    function deleteFood() {
-      otherServices
-        .deleteFood({ token: user.token }, data)
-        .then((e) => e.json())
-        .then((e) => {
-          console.log(e.data);
-          setFoods(e.data);
-        });
-    }
-    click_ref.current = deleteFood;
-  }, [foods]);
-  // const onChange = (page) => {
-  //   setCurrent(page);
-  // };
+    
+  }, []);
+  function deleteFood() {
+    otherServices
+      .deleteFood({ token: user.token }, data)
+      .then((e) => e.json())
+      .then((e) => {
+        console.log(data);
+        setFoods(e.data);
+      });
+  }
+  click_ref.current = deleteFood;
+
   const addFood = () => {
     showDrawer();
     setVisible(true);
