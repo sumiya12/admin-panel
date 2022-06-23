@@ -11,6 +11,7 @@ export default function FoodMenu() {
   const [data, setData] = useState();
   const [visible, setVisible] = useState(false);
   const click_ref = React.useRef(null);
+
   useEffect(() => {
     otherServices
       .getAllFood()
