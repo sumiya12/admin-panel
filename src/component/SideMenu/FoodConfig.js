@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { otherServices } from "../../services/otherServices";
 import { Drawer } from "antd";
@@ -10,7 +10,7 @@ export default function FoodConfig(props) {
   const [user, setUser] = useUser();
   const addFoods = async (event) => {
     event.preventDefault();
-    console.log(event.target.elements.name.value);
+    console.log(event.target.file);
     const data = {
       category_id: event.target.elements.category.value,
       name: event.target.elements.name.value,
@@ -19,8 +19,8 @@ export default function FoodConfig(props) {
       ingredients: event.target.elements.ingredients.value,
       status: false,
       sales: true,
-      image: foods.image,
-      tumb_img: "../../pictures/images/login-background1.png",
+      image: event.target.elements.picture.value,
+      tumb_img: `https://mtars-fooddelivery.s3.ap-southeast-1.amazonaws.com{../../pictures/images/login-background1.png}`,
       token: user.token,
     };
 
@@ -48,36 +48,115 @@ export default function FoodConfig(props) {
       closable={false}
       onClose={props.onClose}
       visible={props.visible}
-      style={{ textAlign: "center" }}
+      style={{ textAlign: "center", background: "#F9F9F9" }}
     >
-      <form action="submit" id="register" method="post" onSubmit={addFoods}>
+      <form
+        action="submit"
+        id="register"
+        method="post"
+        onSubmit={addFoods}
+        className="container"
+        style={{
+          width: "100%",
+          padding: "12px 20px",
+          margin: "8px 0",
+          display: "inline-block",
+
+          borderRadius: "4px",
+          boxSizing: "border-box",
+        }}
+      >
         <div>
-          <label htmlFor="category">category</label>
-          <input type="text" name="category" />
+          <label
+            htmlFor="category"
+            style={{ display: "flex", textAlign: "left" }}
+          >
+            category
+          </label>
+          <input
+            type="text"
+            name="category"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
         <div>
-          <label htmlFor="name">name</label>
-          <input type="text" name="name" />
+          <label htmlFor="name" style={{ display: "flex", textAlign: "left" }}>
+            name
+          </label>
+          <input
+            type="text"
+            name="name"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
         <div>
-          <label htmlFor="price">price</label>
-          <input type="number" name="price" />
+          <label htmlFor="price" style={{ display: "flex", textAlign: "left" }}>
+            price
+          </label>
+          <input
+            type="number"
+            name="price"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
         <div>
-          <label htmlFor="stock">stock</label>
-          <input type="text" name="stock" />
+          <label htmlFor="stock" style={{ display: "flex", textAlign: "left" }}>
+            stock
+          </label>
+          <input
+            type="text"
+            name="stock"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
         <div>
-          <label htmlFor="ingredients">ingredients</label>
-          <input type="text" name="ingredients" />
+          <label
+            htmlFor="ingredients"
+            style={{ display: "flex", textAlign: "left" }}
+          >
+            ingredients
+          </label>
+          <input
+            type="text"
+            name="ingredients"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
         <div>
-          <label htmlFor="status">status</label>
-          <input type="text" name="status" />
+          <label
+            htmlFor="status"
+            style={{ display: "flex", textAlign: "left" }}
+          >
+            status
+          </label>
+          <input
+            type="text"
+            name="status"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
         <div>
-          <label htmlFor="sales">sales</label>
-          <input type="text" name="sales" />
+          <label htmlFor="sales" style={{ display: "flex", textAlign: "left" }}>
+            sales
+          </label>
+          <input
+            type="text"
+            name="sales"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
+        </div>
+        <div>
+          <label
+            htmlFor="Upload image"
+            style={{ display: "flex", textAlign: "left" }}
+          >
+            Upload image
+          </label>
+          <input
+            type="file"
+            name="picture"
+            style={{ width: "100%", borderRadius: "10px", border: "none" }}
+          />
         </div>
 
         <button type="submit" form="register">

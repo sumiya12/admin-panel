@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import { otherServices } from "../../services/otherServices";
-
 import { useOrder } from "../../contexts/OrderContext";
 import { useUser } from "../../contexts/UserContext";
 import moment from "moment";
 import { List, Row, Col, Divider, Pagination, Checkbox } from "antd";
 import "../../style/menuStyle/orders.css";
+
 export default function Orders(values) {
   const [order, setOrder] = useOrder();
   const [user, setUser] = useUser();
@@ -15,6 +14,7 @@ export default function Orders(values) {
   const [checkAll, setCheckAll] = useState(false);
   const CheckboxGroup = Checkbox.Group;
   const plainOptions = [];
+
   useEffect(() => {
     fetch(`https://dev-api.mstars.mn/api/orders?page=${current}`, {
       method: "POST",
@@ -29,18 +29,19 @@ export default function Orders(values) {
         setOrder(e.data.docs);
       });
   }, [current]);
+
   const onChange = (page) => {
     console.log(page);
     setCurrent(page);
   };
+
   const onChanged = (list) => {
-    // debugger;
     setCheckedList(list);
     console.log(list);
     setIndeterminate(!!list.length && list.length < plainOptions.length);
     console.log(list.length);
-    // setCheckAll(list.length === plainOptions.length);
   };
+
   const onCheckAllChange = (e) => {
     setCheckedList(e.target.checked ? plainOptions : []);
     console.log(e.target.checked);
@@ -51,6 +52,15 @@ export default function Orders(values) {
   return (
     <div>
       <Divider orientation="left">Захиалгууд</Divider>
+      <div style={{display:'flex' , justifyContent:'space-between'}}>
+        <select id="framework">
+          <option Defaultvalue="0">Бүгд</option>
+          <option value="1">Хүлээж авсан</option>
+          <option value="2">Амжилттай</option>
+          <option value="3">Цуцлагдсан</option>
+        </select>
+        <button>+ Захиалга нэмэх</button>
+      </div>
       <List
         header={
           <Checkbox
@@ -91,7 +101,6 @@ export default function Orders(values) {
                 style={{
                   marginTop: "0px",
                   background: "white",
-                  // borderBottom: "none",
                 }}
               >
                 <Row
